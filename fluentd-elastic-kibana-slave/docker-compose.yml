@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mdm-ok-test:
+   build: mdm-ok-test
+   image: 31soft/mdm-ok-test:latest
+   container_name: mdm-ok-test
+   expose:
+    - "38081"
+   ports:
+    - '80:80'
+    - '8080:8080'
+    - '9990:9990' 
+   volumes:
+     - "/var/tmp:/logs"
+   restart: always  
+   logging:
+     driver: "fluentd"
+     options:
+       fluentd-address: 194.87.238.201:24224
+       fluentd-async-connect: 'true'
+       tag: httpd.access
